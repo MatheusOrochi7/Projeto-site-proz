@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROZHOJE - Notícias em Tempo Real</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Ir para o conteúdo</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>PROZHOJE</h1>
+                <p>Seu portal de notícias inovador</p>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" data-category="todos">Todos</button>
+                <button class="nav-btn" data-category="educacao">Educação</button>
+                <button class="nav-btn" data-category="tecnologia">Tecnologia</button>
+                <button class="nav-btn" data-category="geral">Geral</button>
+            </nav>
+            <div class="accessibility-controls">
+                <button id="toggleTheme" class="access-btn" aria-label="Alternar tema claro/escuro">🌓</button>
+                <button id="zoomIn" class="access-btn" aria-label="Aumentar Zoom">A+</button>
+                <button id="zoomOut" class="access-btn" aria-label="Diminuir Zoom">A-</button>
+                <button id="resetZoom" class="access-btn" aria-label="Reiniciar Zoom">100%</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <h2 class="banner-title">Bem-vindo ao Proz JF notícias</h2>
+                <p class="banner-subtitle">Acompanhe as principais notícias do momento</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proz Informa Section -->
+    <section class="proz-informa">
+        <div class="container">
+            <h3 class="section-title">Proz Informa</h3>
+            <video controls width="100%" src="video/apresentacao.mp4" type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+        </div>
+    </section>
+
+    <!-- Media Upload Section -->
+    <section class="media-upload">
+        <div class="container">
+            <h3 class="section-title">Enviar Conteúdo de Mídia</h3>
+            <div class="upload-container">
+                <div class="upload-box">
+                    <h4>📻 Enviar Áudio</h4>
+                    <input type="file" id="audioInput" accept=".mp3,audio/mpeg" class="file-input">
+                    <button onclick="handleAudioUpload()" class="btn-upload">Carregar Áudio</button>
+                    <div id="audioPreview" class="preview"></div>
+                </div>
+                <div class="upload-box">
+                    <h4>🎬 Enviar Vídeo</h4>
+                    <input type="file" id="videoInput" accept=".mp4,video/mp4" class="file-input">
+                    <button onclick="handleVideoUpload()" class="btn-upload">Carregar Vídeo</button>
+                    <div id="videoPreview" class="preview"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main">
+        <div class="container">
+            <!-- Notícia em Destaque -->
+            <section class="featured-news">
+                <article class="featured-card">
+                    <div class="featured-image">
+                        <img src="imagens/featured.jpg" alt="Imagem de destaque" class="featured-img">
+                    </div>
+                    <div class="featured-content">
+                        <span class="badge educacao">EDUCAÇÃO</span>
+                        <h2>Trilhas do Futuro: Nova Geração de Alunos Chegam ao Programa</h2>
+                        <p>Com grande expectativa e entusiasmo, os novos alunos do prestigious programa Trilhas do Futuro chegam para transformar suas vidas através da educação de qualidade e mentoria exclusiva. Este é um marco importante na jornada de oportunidades.</p>
+                        <div class="featured-meta">
+                            <span class="date">10 de Fevereiro, 2026</span>
+                            <span class="author">Por ProZHJ Team</span>
+                        </div>
+                        <button class="btn-read-more" onclick="openArticle(1)">Ler Matéria Completa</button>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Grade de Notícias -->
+            <section class="news-grid">
+                <h3 class="section-title">Últimas Notícias</h3>
+                <div class="grid" id="newsGrid">
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="imagens/news1.svg" alt="Notícia 1" class="card-img">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-badge badge tecnologia">TECNOLOGIA</span>
+                            <h4 class="card-title">Startup local lança plataforma educacional</h4>
+                            <p class="card-description">Uma nova plataforma promete conectar estudantes e mentores com recursos interativos e cursos rápidos.</p>
+                            <div class="card-footer">
+                                <span>12 de Fevereiro, 2026</span>
+                                <span>Por ProZHJ</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="imagens/news2.jpg" alt="Notícia 2" class="card-img">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-badge badge geral">GERAL</span>
+                            <h4 class="card-title">Cidade inicia programa de requalificação profissional</h4>
+                            <p class="card-description">Programa oferece cursos gratuitos e vagas de estágio para jovens em transição de carreira.</p>
+                            <div class="card-footer">
+                                <span>8 de Fevereiro, 2026</span>
+                                <span>Por Redação</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="card-image">
+                            <img src="imagens/news3.jpg" alt="Notícia 3" class="card-img">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-badge badge educacao">EDUCAÇÃO</span>
+                            <h4 class="card-title">Programa Trilhas do Futuro abre novas turmas</h4>
+                            <p class="card-description">Inscrições para novas turmas estão abertas com foco em tecnologia e inovação.</p>
+                            <div class="card-footer">
+                                <span>1 de Fevereiro, 2026</span>
+                                <span>Por ProZHJ Team</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter">
+                <div class="newsletter-content">
+                    <h3>Fique por dentro!</h3>
+                    <p>Inscreva-se na nossa newsletter e receba as melhores notícias direto no seu email</p>
+                    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" placeholder="Seu email aqui..." required>
+                        <button type="submit" class="btn-subscribe">Inscrever</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para Artigo Completo -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeArticle()">&times;</span>
+            <div id="articleBody">
+                <!-- Conteúdo do artigo será inserido aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sobre ProZHJ News</h4>
+                    <p>Portal de notícias dedicado a trazer as melhores histórias de educação, tecnologia e inovação.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#">Educação</a></li>
+                        <li><a href="#">Tecnologia</a></li>
+                        <li><a href="#">Geral</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com/prozeducacaobr/?locale=pt_BR">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/prozeducacaobr/">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PROZHOJE. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
