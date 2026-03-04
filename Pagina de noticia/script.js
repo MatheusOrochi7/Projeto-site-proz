@@ -468,7 +468,7 @@ function renderNews(category = 'todos') {
         const newsCard = document.createElement('article');
         newsCard.className = 'news-card';
         newsCard.innerHTML = `
-            <div class="card-image"><img src="${article.image}" alt="${article.title}"></div>
+            <div class="card-image"><img src="${article.image}" alt="${article.title}" class="card-img"></div>
             <div class="card-content">
                 <span class="card-badge badge ${article.category}">${article.category.toUpperCase()}</span>
                 <h3 class="card-title">${article.title}</h3>
@@ -710,7 +710,49 @@ document.addEventListener('DOMContentLoaded', () => {
             renderNews(category);
         });
     });
+    // Configura player do Proz Informa (YouTube via data-youtube)
+    setupProzInformaVideo();
 });
+
+// Converte URLs do YouTube em URLs de embed (aceita youtube.com/watch?v=, youtu.be/, e /embed/)
+function toYouTubeEmbed(url) {
+    if (!url) return null;
+    try {
+        const u = new URL(url);
+        const host = u.hostname.replace('www.', '');
+        if (host === 'youtu.be') {
+            const id = u.pathname.slice(1);
+            return 'https://www.youtube.com/embed/' + id;
+        }
+        if (host.endsWith('youtube.com')) {
+            const v = u.searchParams.get('v');
+            if (v) return 'https://www.youtube.com/embed/' + v;
+            const parts = u.pathname.split('/');
+            const embedIdx = parts.indexOf('embed');
+            if (embedIdx !== -1 && parts[embedIdx+1]) return 'https://www.youtube.com/embed/' + parts[embedIdx+1];
+        }
+    } catch (e) {
+        return null;
+    }
+    return null;
+}
+
+// Substitui o container por um iframe embed quando houver link
+function setupProzInformaVideo() {
+    const section = document.querySelector('.proz-informa');
+    if (!section) return;
+    const youtubeLink = (section.dataset.youtube || '').trim();
+    const player = document.getElementById('prozInformaPlayer');
+    if (!player) return;
+    if (youtubeLink) {
+        const embed = toYouTubeEmbed(youtubeLink);
+        if (embed) {
+            player.innerHTML = `<div class="video-responsive"><iframe width="100%" height="400" src="${embed}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+            return;
+        }
+    }
+    player.innerHTML = '<p>Vídeo não configurado. Adicione o link do YouTube no atributo data-youtube da seção.</p>';
+}
 
 // Smooth scroll para navegação
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -737,6 +779,8 @@ function applyZoom() {
     document.documentElement.style.fontSize = zoomLevel + '%';
     // `zoom` é não-padronizado mas amplamente suportado em navegadores Chromium/Edge/IE
     document.body.style.zoom = (zoomLevel / 100).toString();
+    // Atualiza o rótulo que mostra a porcentagem atual
+    updateZoomLabel();
 }
 
 function adjustZoom(amount) {
@@ -749,6 +793,7 @@ function resetZoom() {
     zoomLevel = 100;
     applyZoom();
     localStorage.setItem('zoomLevel', zoomLevel);
+    updateZoomLabel();
 }
 
 function loadAccessibilityPreferences() {
@@ -757,6 +802,13 @@ function loadAccessibilityPreferences() {
     const zoomStored = parseInt(localStorage.getItem('zoomLevel'));
     if (!isNaN(zoomStored)) zoomLevel = zoomStored;
     applyZoom();
+    updateZoomLabel();
+}
+
+// Atualiza o texto do botão `resetZoom` para exibir a porcentagem atual
+function updateZoomLabel() {
+    const rz = document.getElementById('resetZoom');
+    if (rz) rz.textContent = zoomLevel + '%';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

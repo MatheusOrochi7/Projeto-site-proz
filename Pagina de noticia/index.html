@@ -41,12 +41,15 @@
     </section>
 
     <!-- Proz Informa Section -->
-    <section class="proz-informa">
+    <section class="proz-informa" data-youtube="https://youtu.be/29SQR-m2IgU">
         <div class="container">
             <h3 class="section-title">Proz Informa</h3>
-            <video controls width="100%" src="video/apresentacao.mp4" type="video/mp4">
-                Seu navegador não suporta o elemento de vídeo.
-            </video>
+            <div id="prozInformaPlayer">
+                <!-- Se quiser usar um vídeo do YouTube, preencha o atributo data-youtube na seção
+                     Exemplo: <section class="proz-informa" data-youtube="https://www.youtube.com/watch?v=VIDEO_ID">
+                     Se vazio, exibirá uma mensagem padrão. -->
+                <p>Vídeo não configurado. Adicione o link do YouTube no atributo <strong>data-youtube</strong> da seção.</p>
+            </div>
         </div>
     </section>
 
@@ -96,52 +99,8 @@
             <!-- Grade de Notícias -->
             <section class="news-grid">
                 <h3 class="section-title">Últimas Notícias</h3>
-                <div class="grid" id="newsGrid">
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="imagens/news1.svg" alt="Notícia 1" class="card-img">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-badge badge tecnologia">TECNOLOGIA</span>
-                            <h4 class="card-title">Startup local lança plataforma educacional</h4>
-                            <p class="card-description">Uma nova plataforma promete conectar estudantes e mentores com recursos interativos e cursos rápidos.</p>
-                            <div class="card-footer">
-                                <span>12 de Fevereiro, 2026</span>
-                                <span>Por ProZHJ</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="imagens/news2.jpg" alt="Notícia 2" class="card-img">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-badge badge geral">GERAL</span>
-                            <h4 class="card-title">Cidade inicia programa de requalificação profissional</h4>
-                            <p class="card-description">Programa oferece cursos gratuitos e vagas de estágio para jovens em transição de carreira.</p>
-                            <div class="card-footer">
-                                <span>8 de Fevereiro, 2026</span>
-                                <span>Por Redação</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="news-card">
-                        <div class="card-image">
-                            <img src="imagens/news3.jpg" alt="Notícia 3" class="card-img">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-badge badge educacao">EDUCAÇÃO</span>
-                            <h4 class="card-title">Programa Trilhas do Futuro abre novas turmas</h4>
-                            <p class="card-description">Inscrições para novas turmas estão abertas com foco em tecnologia e inovação.</p>
-                            <div class="card-footer">
-                                <span>1 de Fevereiro, 2026</span>
-                                <span>Por ProZHJ Team</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                <!-- Cards renderizados dinamicamente pelo script.js -->
+                <div class="grid" id="newsGrid"></div>
             </section>
 
             <!-- Newsletter -->
@@ -188,8 +147,8 @@
                     <h4>Redes Sociais</h4>
                     <ul>
                         <li><a href="https://www.facebook.com/prozeducacaobr/?locale=pt_BR">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
                         <li><a href="https://www.instagram.com/prozeducacaobr/">Instagram</a></li>
+                        <li><a href="https://prozeducacao.com.br/">Site Oficial</a></li>
                     </ul>
                 </div>
             </div>
