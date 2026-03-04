@@ -1,6 +1,6 @@
 # 📰 Proz News
 
-![Banner do projeto](imagens/banner.jpg)
+![Banner do projeto](imagens/banner.png)
 
 ## 📋 Sobre o Projeto
 
