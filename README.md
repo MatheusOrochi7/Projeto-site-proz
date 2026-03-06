@@ -1,6 +1,6 @@
 # 📰 ProzNews
 
-![Banner do projeto](imagens/banner.jpg)
+![Banner do projeto](imagens/banner.png)
 
 ## 📋 Sobre o Projeto
 
@@ -48,10 +48,10 @@ pagina de noticia/
 
 | Nome | Função | GitHub |
 |------|--------|--------|
-| Gabriela Ambrósio | Editora-chefe | [@](https://github.com) |
-| Guilherme e Matheus | Webmaster |[@](https://github.com/GuilhermeCadedos) [@](https://github.com/MatheusOrochi7)| 
-| Giovanna | Repórter | [@](https://github.com) |
-| Gabriela Ambrósio | Fotógrafo | [@](https://github.com) |
+| Gabriela Ambrósio | Editora-chefe | Fotógrafo | [@Gabriela](https://github.com) |
+| Guilherme e Matheus | Webmaster |[@Guilherme](https://github.com/GuilhermeCadedos) [@Matheus](https://github.com/MatheusOrochi7)| 
+| Giovanna | Repórter | [@Giovanna](https://github.com) |
+
 
 
 ## 📝 Licença
