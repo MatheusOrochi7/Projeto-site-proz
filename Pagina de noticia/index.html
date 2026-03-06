@@ -53,23 +53,13 @@
         </div>
     </section>
 
-    <!-- Media Upload Section -->
-    <section class="media-upload">
+    <!-- Vídeo do YouTube Section -->
+    <section class="canva-video" data-youtube="https://youtu.be/wYZwBP3Rkco">
         <div class="container">
-            <h3 class="section-title">Enviar Conteúdo de Mídia</h3>
-            <div class="upload-container">
-                <div class="upload-box">
-                    <h4>📻 Enviar Áudio</h4>
-                    <input type="file" id="audioInput" accept=".mp3,audio/mpeg" class="file-input">
-                    <button onclick="handleAudioUpload()" class="btn-upload">Carregar Áudio</button>
-                    <div id="audioPreview" class="preview"></div>
-                </div>
-                <div class="upload-box">
-                    <h4>🎬 Enviar Vídeo</h4>
-                    <input type="file" id="videoInput" accept=".mp4,video/mp4" class="file-input">
-                    <button onclick="handleVideoUpload()" class="btn-upload">Carregar Vídeo</button>
-                    <div id="videoPreview" class="preview"></div>
-                </div>
+            <h3 class="section-title">Podcast</h3>
+            <div id="youtubePlayer">
+                <!-- Vídeo será incorporado aqui dinamicamente -->
+                <p>Vídeo não configurado. Adicione o link do YouTube no atributo <strong>data-youtube</strong> da seção.</p>
             </div>
         </div>
     </section>
@@ -114,34 +104,6 @@
                     </form>
                 </div>
             </section>
-
-            <!-- Equipe Responsável -->
-            <section class="equipe-responsavel">
-                <h3>Equipe Responsável</h3>
-                <div class="responsaveis-list">
-                    <div class="responsavel">
-                        <div class="responsavel-icon">👥</div>
-                        <h4>Guilherme e Matheus</h4>
-                        <p>Responsável pelo desenvolvimento e manutenção do site.</p>
-                    </div>
-                    <div class="responsavel">
-                        <div class="responsavel-icon">👤</div>
-                        <h4>Gabriela Ambrósio</h4>
-                        <p>Responsável pela edição e revisão de conteúdo.</p>
-                    </div>
-                    <div class="responsavel">
-                        <div class="responsavel-icon">👤</div>
-                        <h4>Giovanna</h4>
-                        <p>Responsável pela cobertura jornalística e reportagens.</p>
-                    </div>
-                    <div class="responsavel">
-                        <div class="responsavel-icon">👤</div>
-                        <h4>Gabriela Ambrósio</h4>
-                        <p>Responsável pelas fotografias e imagens do site.</p>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </main>
 

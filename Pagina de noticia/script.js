@@ -539,166 +539,6 @@ function subscribeNewsletter(event) {
     form.reset();
 }
 
-// Funções de Upload de Áudio
-function handleAudioUpload() {
-    const audioInput = document.getElementById('audioInput');
-    const audioPreview = document.getElementById('audioPreview');
-    
-    if (audioInput.files.length === 0) {
-        alert('Por favor, selecione um arquivo de áudio!');
-        return;
-    }
-
-    const file = audioInput.files[0];
-    
-    // Validar formato
-    if (!file.type.startsWith('audio/')) {
-        alert('Por favor, selecione um arquivo de áudio valido (MP3)!');
-        return;
-    }
-
-    // Validar tamanho (máximo 50MB)
-    if (file.size > 50 * 1024 * 1024) {
-        alert('O arquivo é muito grande! Máximo 50MB.');
-        return;
-    }
-
-    // Criar objeto URL para reprodução
-    const audioUrl = URL.createObjectURL(file);
-    const fileName = file.name;
-    const fileSize = (file.size / 1024 / 1024).toFixed(2); // Converter para MB
-
-    // Atualizar preview
-    audioPreview.innerHTML = `
-        <div class="preview-info">
-            📁 <strong>${fileName}</strong> (${fileSize} MB)
-        </div>
-        <audio controls>
-            <source src="${audioUrl}" type="${file.type}">
-            Seu navegador não suporta o elemento de áudio.
-        </audio>
-        <div style="margin-top: 10px;">
-            <button class="btn-download" onclick="downloadFile('${audioUrl}', '${fileName}')">⬇️ Download</button>
-            <button class="btn-delete" onclick="clearAudioPreview()">🗑️ Limpar</button>
-        </div>
-    `;
-    audioPreview.classList.add('show');
-    
-    // Salvar no localStorage
-    saveMediaToLocalStorage('audio', {
-        name: fileName,
-        size: fileSize,
-        url: audioUrl,
-        type: 'audio'
-    });
-}
-
-// Funções de Upload de Vídeo
-function handleVideoUpload() {
-    const videoInput = document.getElementById('videoInput');
-    const videoPreview = document.getElementById('videoPreview');
-    
-    if (videoInput.files.length === 0) {
-        alert('Por favor, selecione um arquivo de vídeo!');
-        return;
-    }
-
-    const file = videoInput.files[0];
-    
-    // Validar formato
-    if (!file.type.startsWith('video/')) {
-        alert('Por favor, selecione um arquivo de vídeo valido (MP4)!');
-        return;
-    }
-
-    // Validar tamanho (máximo 500MB)
-    if (file.size > 500 * 1024 * 1024) {
-        alert('O arquivo é muito grande! Máximo 500MB.');
-        return;
-    }
-
-    // Criar objeto URL para reprodução
-    const videoUrl = URL.createObjectURL(file);
-    const fileName = file.name;
-    const fileSize = (file.size / 1024 / 1024).toFixed(2); // Converter para MB
-
-    // Atualizar preview
-    videoPreview.innerHTML = `
-        <div class="preview-info">
-            🎬 <strong>${fileName}</strong> (${fileSize} MB)
-        </div>
-        <video width="100%" height="300" controls>
-            <source src="${videoUrl}" type="${file.type}">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-        <div style="margin-top: 10px;">
-            <button class="btn-download" onclick="downloadFile('${videoUrl}', '${fileName}')">⬇️ Download/Salvar</button>
-            <button class="btn-delete" onclick="clearVideoPreview()">🗑️ Limpar</button>
-        </div>
-    `;
-    videoPreview.classList.add('show');
-    
-    // Salvar no localStorage
-    saveMediaToLocalStorage('video', {
-        name: fileName,
-        size: fileSize,
-        url: videoUrl,
-        type: 'video'
-    });
-}
-
-// Função para download de arquivo
-function downloadFile(url, fileName) {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    alert(`✅ Arquivo '${fileName}' salvo com sucesso!`);
-}
-
-// Salvar mídia no localStorage
-function saveMediaToLocalStorage(type, mediaData) {
-    let mediaList = JSON.parse(localStorage.getItem(`${type}_media`) || '[]');
-    const timestamp = new Date().toLocaleString('pt-BR');
-    
-    mediaList.push({
-        ...mediaData,
-        savedAt: timestamp
-    });
-    
-    // Manter apenas os últimos 10 arquivos
-    if (mediaList.length > 10) {
-        mediaList = mediaList.slice(-10);
-    }
-    
-    localStorage.setItem(`${type}_media`, JSON.stringify(mediaList));
-    alert(`✅ ${type === 'audio' ? 'Áudio' : 'Vídeo'} salvo no histórico!`);
-}
-
-// Limpar preview de áudio
-function clearAudioPreview() {
-    const audioInput = document.getElementById('audioInput');
-    const audioPreview = document.getElementById('audioPreview');
-    
-    audioInput.value = '';
-    audioPreview.innerHTML = '';
-    audioPreview.classList.remove('show');
-    alert('Áudio removido!');
-}
-
-// Limpar preview de vídeo
-function clearVideoPreview() {
-    const videoInput = document.getElementById('videoInput');
-    const videoPreview = document.getElementById('videoPreview');
-    
-    videoInput.value = '';
-    videoPreview.innerHTML = '';
-    videoPreview.classList.remove('show');
-    alert('Vídeo removido!');
-}
-
 // Inicializar página
 document.addEventListener('DOMContentLoaded', () => {
     renderNews('todos');
@@ -712,6 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Configura player do Proz Informa (YouTube via data-youtube)
     setupProzInformaVideo();
+    // Configura player do YouTube
+    setupYouTubeVideo();
 });
 
 // Converte URLs do YouTube em URLs de embed (aceita youtube.com/watch?v=, youtu.be/, e /embed/)
@@ -743,6 +585,23 @@ function setupProzInformaVideo() {
     if (!section) return;
     const youtubeLink = (section.dataset.youtube || '').trim();
     const player = document.getElementById('prozInformaPlayer');
+    if (!player) return;
+    if (youtubeLink) {
+        const embed = toYouTubeEmbed(youtubeLink);
+        if (embed) {
+            player.innerHTML = `<div class="video-responsive"><iframe width="100%" height="400" src="${embed}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+            return;
+        }
+    }
+    player.innerHTML = '<p>Vídeo não configurado. Adicione o link do YouTube no atributo data-youtube da seção.</p>';
+}
+
+// Substitui o container por um iframe embed para o vídeo do YouTube
+function setupYouTubeVideo() {
+    const section = document.querySelector('.canva-video');
+    if (!section) return;
+    const youtubeLink = (section.dataset.youtube || '').trim();
+    const player = document.getElementById('youtubePlayer');
     if (!player) return;
     if (youtubeLink) {
         const embed = toYouTubeEmbed(youtubeLink);
