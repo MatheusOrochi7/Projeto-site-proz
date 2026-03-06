@@ -311,6 +311,9 @@ a:hover {
     min-height: 320px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .featured-image .featured-img {
@@ -791,4 +794,11 @@ a:hover {
     .card-title {
         font-size: 16px;
     }
+    
+}
+.informacao-video {
+    font-size: 18px;
+    color: var(--dark-gray);
+    margin-top: 20px;
+    margin-bottom: 0.25rem;
 }

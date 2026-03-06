@@ -1,6 +1,6 @@
 # 📰 ProzNews
 
-![Banner do projeto](imagens/banner.png)
+
 
 ## 📋 Sobre o Projeto
 
@@ -34,9 +34,9 @@ pagina de noticia/
 ## 📰 Conteúdo publicado
 
 ### Notícias escritas
-1. 🎓 **Formatura da Turma** - [link](noticias/formatura.html)
-2. 🔬 **Feira de Ciências** - [link](noticias/feira-ciencias.html)
-3. ⚽ **Campeonato de Futebol** - [link](noticias/futebol.html)
+1. 🎓 **Trilhas do Futuro** 
+2. 🔬 **Prozsaport** 
+3. ⚽ **Novo local em Juiz de Fora** 
 
 ### Vídeo
 🎥 **Proz Informa** - [link do YouTube](https://youtu.be/29SQR-m2IgU)
